@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/first_mysql?useUnicode=true&characterEncoding=utf-8&useSSL=true&jdbcCompliantTruncation=false
+    username: root
+    password:
+server:
+  port:
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true

@@ -10,8 +10,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @TableName("user")
 public class User {
-    private int id;
+    private String id;
     private String sessionKey;
     private String openId;
     private String password;
 }
+//要存入数据库的用户信息

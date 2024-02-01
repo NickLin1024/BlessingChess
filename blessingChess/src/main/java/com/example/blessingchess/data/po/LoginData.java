@@ -16,3 +16,4 @@ public class LoginData {
     private String rawData;
     private String signature;
 }
+//这个是前端发送给后端的登录信息实体类

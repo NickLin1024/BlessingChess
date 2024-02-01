@@ -14,15 +14,15 @@ public class Result {
     private String message;
 
     public static Result success(Object data){
-        return new Result(200, data, null);
+        return new Result(200, data, "success");
     }
 
     public static Result ok() {
-        return new Result(200, null, null);
+        return new Result(200, null, "ok");
     }
 
     public static Result error(Integer code, String message){
-        return new Result(code, null, message);
+        return new Result(code, null, "error");
     }
 
 }

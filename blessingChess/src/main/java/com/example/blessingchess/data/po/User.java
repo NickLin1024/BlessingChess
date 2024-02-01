@@ -10,5 +10,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @TableName("user")
 public class User {
-
+    private int id;
+    private String sessionKey;
+    private String openId;
+    private String password;
 }

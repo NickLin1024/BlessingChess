@@ -48,6 +48,13 @@
 			<version>3.5.1</version>
 		</dependency>
 
+		<!-- JWT-用来生成Token-->
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.1</version>
+		</dependency>
+
 		<!--lombok-->
 		<dependency>
 			<groupId>org.projectlombok</groupId>

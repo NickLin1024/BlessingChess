@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class WeChatLoginResult<T> {
-    private User user;
+    private T user;
     private String unionId;
     private String errmsg;
     private int errcode;

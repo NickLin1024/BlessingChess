@@ -1,4 +1,4 @@
-package com.example.blessingchess.data.po;
+package com.example.blessingchess.data.po.WeChatLogin;
 
 import lombok.*;
 
@@ -12,4 +12,4 @@ public class WeChatLoginModel {
     private String appId;
     private String secret;
 }
-//用LoginData中的code还有微信小程序标识的AppID和AppSecret去请求openID和session_key，所以这个是登录模型
+//用LoginData中的code还有微信小程序标识的AppID和AppSecret去请求openID和session_key，这个是登录模型

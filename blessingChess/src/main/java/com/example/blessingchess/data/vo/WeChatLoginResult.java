@@ -1,6 +1,6 @@
 package com.example.blessingchess.data.vo;
 
-import com.example.blessingchess.data.po.User;
+import com.example.blessingchess.data.po.WeChatLogin.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

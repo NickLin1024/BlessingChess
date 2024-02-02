@@ -1,6 +1,6 @@
 package com.example.blessingchess.controller;
 
-import com.example.blessingchess.data.po.LoginData;
+import com.example.blessingchess.data.po.WeChatLogin.LoginData;
 import com.example.blessingchess.data.vo.Result;
 import com.example.blessingchess.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +16,12 @@ public class UserController {
     @Autowired
     LoginService loginService;//调用登录Service
 
-    //登录用接口，目前预想的是直接返回Token
+    //登录用接口
     @PostMapping("/login")
     public Result handleLogin(@RequestBody LoginData loginData) {
-        return Result.success(loginService.getToken(loginData));//把前端发送的登录信息传进去
+
+        //传入登录信息，并返回Token
+        return loginService.getToken(loginData);
     }
 
 }

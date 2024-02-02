@@ -13,8 +13,8 @@ public class Result {
     private Object data;
     private String message;
 
-    public static Result success(Object data){
-        return new Result(200, data, "success");
+    public static Result success(Object data, String message){
+        return new Result(200, data, message);
     }
 
     public static Result ok() {
@@ -22,7 +22,7 @@ public class Result {
     }
 
     public static Result error(Integer code, String message){
-        return new Result(code, null, "error");
+        return new Result(code, null, message);
     }
 
 }

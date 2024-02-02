@@ -1,6 +1,6 @@
 package com.example.blessingchess.controller;
 
-import com.example.blessingchess.data.po.WeChatLogin.LoginData;
+import com.example.blessingchess.data.dto.LoginData;
 import com.example.blessingchess.data.vo.Result;
 import com.example.blessingchess.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;

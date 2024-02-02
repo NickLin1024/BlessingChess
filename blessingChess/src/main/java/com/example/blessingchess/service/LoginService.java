@@ -2,9 +2,9 @@ package com.example.blessingchess.service;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.example.blessingchess.data.po.WeChatLogin.LoginData;
+import com.example.blessingchess.data.dto.LoginData;
 import com.example.blessingchess.data.po.WeChatLogin.User;
-import com.example.blessingchess.data.po.WeChatLogin.WeChatLoginModel;
+import com.example.blessingchess.data.dto.WeChatLoginModel;
 import com.example.blessingchess.data.vo.Result;
 import com.example.blessingchess.data.vo.WeChatLoginResult;
 import com.example.blessingchess.data.wechat.WeChat;

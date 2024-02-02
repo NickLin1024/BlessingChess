@@ -1,4 +1,4 @@
-package com.example.blessingchess.data.po.WeChatLogin;
+package com.example.blessingchess.data.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -8,6 +8,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Data
 @NoArgsConstructor
@@ -21,5 +23,21 @@ public class User {
     private String password;
     private String token;
     private Date lastTime;
+    private String username;
+
+    /**
+     * 将用户信息转换成Map包装进token
+     * @return 用户信息（不包含密码）的Map
+     */
+    public Map<String, Object> toMap() {
+        Map<String, Object> userMap = new HashMap<>();
+        userMap.put("id", getId());
+        userMap.put("sessionKey", getSessionKey());
+        userMap.put("openId", getOpenId());
+        userMap.put("token", getToken());
+        userMap.put("lastTime", getLastTime());
+        userMap.put("username", getUsername());
+        return userMap;
+    }
 }
 //要存入数据库的用户信息

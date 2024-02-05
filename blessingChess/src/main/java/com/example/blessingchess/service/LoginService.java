@@ -15,6 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.example.blessingchess.utils.JwtUtils;
 
 @Service
 public class LoginService {
@@ -75,7 +79,7 @@ public class LoginService {
                     user.setOpenId(jsonObject.getString("openid"));
                     user.setPassword(jsonObject.getString("openid"));
                     user.setLastTime(new Date());
-                    user.setToken(creatToken(user));
+                    user.setToken(JwtUtils.generateJwt(user));
 
                     //在数据库中插入新用户
                     userMapper.insert(user);
@@ -101,7 +105,7 @@ public class LoginService {
     }
 
 
-    //这里用来生成Token,问就是抄的,原理我也不知道
+/*    //这里用来生成Token,问就是抄的,原理我也不知道
     public String creatToken(User user) {
         String token="";
         token= JWT.create()
@@ -113,6 +117,6 @@ public class LoginService {
                 .withAudience(String.valueOf(user.getId()))
                 .sign(Algorithm.HMAC256(user.getPassword()));
         return token;
-    }
+    }*/
 
 }

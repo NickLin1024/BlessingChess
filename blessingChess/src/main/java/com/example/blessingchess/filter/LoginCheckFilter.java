@@ -16,6 +16,7 @@ import java.io.IOException;
  *
  * @author LXY
  * @version 1.0
+ * @since 2024-02-5
  */
 @WebFilter(urlPatterns = "/*") //拦截所有请求
 public class LoginCheckFilter implements Filter {

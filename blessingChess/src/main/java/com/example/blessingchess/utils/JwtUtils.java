@@ -13,7 +13,7 @@ import java.util.Map;
  *
  * @author LXY
  * @version 1.0
- * @since 2023-06-15
+ * @since 2024-02-5
  * @
  */
 public class JwtUtils {

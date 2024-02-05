@@ -20,21 +20,18 @@ public class User {
     private Integer id;
     private String sessionKey;
     private String openId;
-    private String password;
-    private String token;
     private Date lastTime;
     private String username;
 
     /**
      * 将用户信息转换成Map包装进token
-     * @return 用户信息（不包含密码）的Map
+     * @return 用户信息的Map
      */
     public Map<String, Object> toMap() {
         Map<String, Object> userMap = new HashMap<>();
         userMap.put("id", getId());
         userMap.put("sessionKey", getSessionKey());
         userMap.put("openId", getOpenId());
-        userMap.put("token", getToken());
         userMap.put("lastTime", getLastTime());
         userMap.put("username", getUsername());
         return userMap;

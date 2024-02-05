@@ -35,26 +35,25 @@ public class LoginService {
         WeChatLoginModel model = new WeChatLoginModel(loginData.getCode(), WeChat.appId,WeChat.secret);
 
         //传入登录模型，取得登录接口响应的信息
-        WeChatLoginResult<User> result = WeChatLogin(model);
+        WeChatLoginResult result = WeChatLogin(model);
 
         //返回结果，成功则返回Token
-        if(result.getUser() == null) {
+        if(result.getToken() == null) {
             return Result.error(0, "登录失败");
         }
         else {
-            return Result.success(result.getUser().getToken(), "登录成功");
+            return Result.success(result.getToken(), "登录成功");
         }
     }
 
 
     //返回登录接口响应数据
-    public WeChatLoginResult<User> WeChatLogin(WeChatLoginModel model) {
+    public WeChatLoginResult WeChatLogin(WeChatLoginModel model) {
 
         //实例化返回模型
-        WeChatLoginResult<User> result = new WeChatLoginResult<>();
+        WeChatLoginResult result = new WeChatLoginResult();
 
         try {
-
             //打包好url并发送请求
             String urlFormat = "https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code";
             String url = String.format(urlFormat, WeChat.appId, WeChat.secret, model.getCode());
@@ -77,10 +76,8 @@ public class LoginService {
                     user = new User();
                     user.setSessionKey(jsonObject.getString("session_key"));
                     user.setOpenId(jsonObject.getString("openid"));
-                    user.setPassword(jsonObject.getString("openid"));
                     user.setLastTime(new Date());
-                    //将用户信息传入token的载荷中
-                    user.setToken(JwtUtils.generateJwt(user.toMap()));
+                    user.setUsername("??");
 
                     //在数据库中插入新用户
                     userMapper.insert(user);
@@ -94,8 +91,11 @@ public class LoginService {
                     userMapper.updateById(user);/*TODO：这里用了BaseMapper的update，但是不知道这样写行不行*/
                 }
 
+                //将用户信息传入token的载荷中
+                String userToken =(JwtUtils.generateJwt(user.toMap()));
+
                 //封装返回模型
-                result.setUser(user);
+                result.setToken(userToken);
                 result.setUnionId(jsonObject.getString("unionid"));
             }
         }catch (Exception e) {

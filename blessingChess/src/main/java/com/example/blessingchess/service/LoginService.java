@@ -79,7 +79,8 @@ public class LoginService {
                     user.setOpenId(jsonObject.getString("openid"));
                     user.setPassword(jsonObject.getString("openid"));
                     user.setLastTime(new Date());
-                    user.setToken(JwtUtils.generateJwt(user));
+                    //将用户信息传入token的载荷中
+                    user.setToken(JwtUtils.generateJwt(user.toMap()));
 
                     //在数据库中插入新用户
                     userMapper.insert(user);

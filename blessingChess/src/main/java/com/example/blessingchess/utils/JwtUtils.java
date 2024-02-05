@@ -6,6 +6,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 import java.util.Date;
+import java.util.Map;
 
 /**
  * JwtUtils类用于生成和解析JWT令牌。
@@ -28,9 +29,9 @@ public class JwtUtils {
      * @param claims JWT第二部分负载 payload 中存储的内容
      * @return 生成的jwt令牌
      */
-    public static String generateJwt(User claims){
+    public static String generateJwt(Map<String, Object> claims){
         String jwt = Jwts.builder()
-                .addClaims(claims.toMap())//自定义信息（有效载荷）
+                .addClaims(claims)//载荷中放入user
                 .signWith(SignatureAlgorithm.HS256, signKey)//签名算法（头部）
                 .setExpiration(new Date(System.currentTimeMillis() + expire))//过期时间
                 .compact();

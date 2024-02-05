@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class WeChatLoginResult<T> {
-    private T user;
+public class WeChatLoginResult {
+    private String token = null;
     private String unionId;
     private String errmsg;
     private int errcode;

@@ -21,7 +21,7 @@ public class UserController {
     public Result handleLogin(@RequestBody LoginData loginData) {
 
         //传入登录信息，并返回Token
-        return loginService.getToken(loginData);
+        return loginService.testGetToken(loginData);
     }
 
 }

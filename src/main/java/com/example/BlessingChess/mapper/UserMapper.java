@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.*;
 @Mapper
 public interface UserMapper {
 
-    @Select("select * from user where openid = #{openId}")
+    @Select("select * from user where open_id = #{openId}")
     User findUserByOpenId(String openId);
 
     //会自动将生成的id值，赋值给user对象的id属性

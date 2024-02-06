@@ -9,11 +9,14 @@ import com.example.BlessingChess.data.wechat.WeChat;
 import com.example.BlessingChess.mapper.UserMapper;
 import com.example.BlessingChess.utils.HttpClientUtil;
 import com.example.BlessingChess.utils.JwtUtils;
+import com.example.BlessingChess.utils.RandomStringGenerator;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Date;
+
 
 /**
  * 用于微信用户登录
@@ -79,7 +82,7 @@ public class LoginService {
                     user = new User();
                     user.setSessionKey(jsonObject.getString("session_key"));
                     user.setOpenId(jsonObject.getString("openid"));
-                    user.setLastTime(new Date());
+                    user.setLastTime(LocalDateTime.now());
                     user.setUsername("??");
 
                     //在数据库中插入新用户
@@ -90,7 +93,7 @@ public class LoginService {
                 else {
 
                     //更新最后登录时间
-                    user.setLastTime(new Date());
+                    user.setLastTime(LocalDateTime.now());
                     userMapper.updateById(user);/*TODO：这里用了BaseMapper的update，但是不知道这样写行不行*/
                 }
 
@@ -108,4 +111,43 @@ public class LoginService {
         return result;
     }
 
+    public Result testGetToken(LoginData loginData) {
+
+        WeChatLoginResult result = new WeChatLoginResult();
+
+        //在数据库中根据openid查找信息
+        User user;
+        user = userMapper.findUserByOpenId(loginData.getCode());
+
+        //如果没有登录过，数据库里面没有数据
+        if (user == null || user.getId() == null) {
+
+            //打包User实体
+            user = new User();
+            user.setSessionKey(RandomStringGenerator.generateRandomString(10));
+            user.setOpenId(loginData.getCode());
+            user.setLastTime(LocalDateTime.now());
+            user.setUsername("??");
+
+            //在数据库中插入新用户
+            userMapper.insert(user);
+        }
+        //如果有登录过
+        else {
+            //更新最后登录时间
+            user.setLastTime(LocalDateTime.now());
+            userMapper.updateById(user);/*TODO：这里用了BaseMapper的update，但是不知道这样写行不行*/
+        }
+        //将用户信息传入token的载荷中
+        String userToken = (JwtUtils.generateJwt(user.toMap()));
+        //封装返回模型
+        result.setToken(userToken);
+
+        //返回结果，成功则返回Token
+        if (result.getToken() == null) {
+            return Result.error(0, "登录失败");
+        } else {
+            return Result.success(result.getToken(), "登录成功");
+        }
+    }
 }

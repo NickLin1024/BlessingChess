@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,7 +22,7 @@ public class User {
     private Integer id;
     private String sessionKey;
     private String openId;
-    private Date lastTime;
+    private LocalDateTime lastTime;
     private String username;
 
     /**
@@ -32,7 +34,7 @@ public class User {
         userMap.put("id", getId());
         userMap.put("sessionKey", getSessionKey());
         userMap.put("openId", getOpenId());
-        userMap.put("lastTime", getLastTime());
+        userMap.put("lastTime", getLastTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));  //转为前端能解析的格式
         userMap.put("username", getUsername());
         return userMap;
     }

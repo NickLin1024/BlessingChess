@@ -18,7 +18,7 @@ public class GreetingCard {
     private Integer id;
     private String receiverID;
     private String senderID;
-    private Date lastTime;
+    private Date deliveryTime;
     private String content;
-    private String iconName;
+    private String icon;
 }

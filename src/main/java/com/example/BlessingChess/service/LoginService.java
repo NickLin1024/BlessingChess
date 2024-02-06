@@ -15,10 +15,18 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
+/**
+ * 用于微信用户登录
+ * 验证微信登录并发放JWT令牌
+ *
+ * @author LJY LXY
+ * @version 2.0
+ * @since 2024-02-5
+ */
 @Service
 public class LoginService {
 
-    //注入UserMapper
+    //注入UserMapper 
     @Autowired
     UserMapper userMapper;
 

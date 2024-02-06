@@ -24,6 +24,7 @@ public class User {
     private String openId;
     private LocalDateTime lastTime;
     private String username;
+    private String invitationCode;
 
     /**
      * 将用户信息转换成Map包装进token
@@ -32,7 +33,6 @@ public class User {
     public Map<String, Object> toMap() {
         Map<String, Object> userMap = new HashMap<>();
         userMap.put("id", getId());
-        userMap.put("sessionKey", getSessionKey());
         userMap.put("openId", getOpenId());
         userMap.put("lastTime", getLastTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));  //转为前端能解析的格式
         userMap.put("username", getUsername());

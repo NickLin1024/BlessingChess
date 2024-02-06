@@ -11,9 +11,6 @@ import lombok.NoArgsConstructor;
 public class LoginData {
     @Getter
     private String code;
-    private String encryptedData;
-    private String iv;
-    private String rawData;
-    private String signature;
+    private String wxUsername;
 }
 //这个是前端发送给后端的登录信息实体类

@@ -7,15 +7,14 @@ import com.example.BlessingChess.data.vo.Result;
 import com.example.BlessingChess.data.vo.WeChatLoginResult;
 import com.example.BlessingChess.data.wechat.WeChat;
 import com.example.BlessingChess.mapper.UserMapper;
-import com.example.BlessingChess.utils.HttpClientUtil;
-import com.example.BlessingChess.utils.JwtUtils;
-import com.example.BlessingChess.utils.RandomStringGenerator;
+import com.example.BlessingChess.utils.*;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Random;
 
 
 /**
@@ -32,6 +31,13 @@ public class LoginService {
     //注入UserMapper 
     @Autowired
     UserMapper userMapper;
+
+    //注入UserUtils
+    @Autowired
+    UserUtils userUtils;
+
+    @Autowired
+    RandomUtil randomUtil;
 
 
     //接受前端传入的登录信息并处理
@@ -76,7 +82,7 @@ public class LoginService {
                 user = userMapper.findUserByOpenId(jsonObject.getString("openid"));
 
                 //如果没有登录过，数据库里面没有数据
-                if (user == null || user.getId() == null) {
+                if ( ! userUtils.hasUser(user)) {
 
                     //打包User实体
                     user = new User();
@@ -84,6 +90,7 @@ public class LoginService {
                     user.setOpenId(jsonObject.getString("openid"));
                     user.setLastTime(LocalDateTime.now());
                     user.setUsername(model.getWxUsername());
+                    user.setInvitationCode(randomUtil.RandomInvitationCode());
 
                     //在数据库中插入新用户
                     userMapper.insertNewUser(user);

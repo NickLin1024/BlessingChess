@@ -7,8 +7,12 @@ import org.apache.ibatis.annotations.*;
 @Mapper
 public interface UserMapper extends BaseMapper<User> {
 
+    //根据openid查找用户
     @Select("select * from user where open_id = #{openId}")
     User findUserByOpenId(String openId);
+
+    @Select("select * from user where invitationCode = #{invitationCode}")
+    User findUserByInvitationCode(String invitationCode);
 
     //会自动将生成的id值，赋值给user对象的id属性
     @Options(useGeneratedKeys = true,keyProperty = "id")

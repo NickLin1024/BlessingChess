@@ -6,6 +6,12 @@ import org.springframework.stereotype.Service;
 import java.util.Random;
 
 //用于生成随机的邀请码
+
+/**
+ * 生成随机的邀请码
+ *
+ * @author ljy
+ */
 @Service
 public class RandomUtil {
 

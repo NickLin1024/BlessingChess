@@ -9,16 +9,54 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
+/**
+ * 贺卡的持久对象实体类，用于在数据库中存储和管理祝福信息。
+ *
+ * @author LRQ LXY
+ * @version 1.1
+ * @since 2024-02-11
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @TableName("card")
 public class GreetingCard {
+    /**
+     * 贺卡的唯一标识符，由数据库自动生成。
+     *
+     * @TableId 注解表示该字段是表的主键，type = IdType.AUTO表示主键是自增的。
+     */
     @TableId(type = IdType.AUTO)
     private Integer id;
-    private String receiverID;
-    private String senderID;
+
+    /**
+     * 发送贺卡的用户的ID。
+     */
+    private String senderId;
+
+    /**
+     * 贺卡的发送时间。
+     */
     private Date deliveryTime;
+
+    /**
+     * 贺卡的内容。
+     */
     private String content;
+
+    /**
+     * 贺卡的图标图片URL。
+     */
     private String icon;
+
+    /**
+     * 贺卡的背景图片URL。
+     */
+    private String background;
+
+    /**
+     * 标识该贺卡是否已经被查看。
+     * true表示已查看，false表示未查看。
+     */
+    private boolean isViewed;
 }

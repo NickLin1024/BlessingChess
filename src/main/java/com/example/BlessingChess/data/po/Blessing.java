@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -32,17 +33,17 @@ public class Blessing {
     /**
      * 发送祝福的用户的ID。
      */
-    private String senderId;
+    private Integer senderId;
 
     /**
      * 接收祝福的用户的ID。
      */
-    private String receiverId;
+    private Integer receiverId;
 
     /**
      * 祝福的发送时间。
      */
-    private Date deliveryTime;
+    private LocalDateTime deliveryTime;
 
     /**
      * 祝福的内容。

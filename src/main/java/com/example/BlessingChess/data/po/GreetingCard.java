@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -32,12 +33,12 @@ public class GreetingCard {
     /**
      * 发送贺卡的用户的ID。
      */
-    private String senderId;
+    private Integer senderId;
 
     /**
      * 贺卡的发送时间。
      */
-    private Date deliveryTime;
+    private LocalDateTime deliveryTime;
 
     /**
      * 贺卡的内容。
@@ -53,10 +54,4 @@ public class GreetingCard {
      * 贺卡的背景图片URL。
      */
     private String background;
-
-    /**
-     * 标识该贺卡是否已经被查看。
-     * true表示已查看，false表示未查看。
-     */
-    private boolean isViewed;
 }

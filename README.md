@@ -13,8 +13,7 @@
 
 ## 接口文档：
 
->GxXi 在 Apifox 中邀请你加入团队 BlessingChess
-><br>https://app.apifox.com/invite?token=NecrOThoJ-h4RMevualXx
+[BlessingChess接口文档](https://apifox.com/apidoc/shared-3e150537-fd3c-4f70-ae07-e75b401dac38)
 
 ## 数据库结构
 

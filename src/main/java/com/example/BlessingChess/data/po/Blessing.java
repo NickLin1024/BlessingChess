@@ -3,6 +3,7 @@ package com.example.BlessingChess.data.po;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.example.BlessingChess.data.dto.BlessingReceiver;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -65,4 +66,16 @@ public class Blessing {
      * true表示已查看，false表示未查看。
      */
     private boolean isViewed;
+
+    /**
+     * 用于直接通过dto构建新贺卡对象的构造方法
+     * @param blessingReceiver 前端传入的dto
+     */
+    public Blessing(BlessingReceiver blessingReceiver){
+        setSenderId(blessingReceiver.getSenderId());
+        setContent(blessingReceiver.getContent());
+        setIcon(blessingReceiver.getIconUrl());
+        setBackground(blessingReceiver.getBackgroundUrl());
+        setDeliveryTime(LocalDateTime.now());
+    }
 }

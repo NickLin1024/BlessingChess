@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.BlessingChess.mapper.GreetingCardMapper">
+
+    <!--查询用户发送的贺卡-->
+    <select id="selectBySenderId" resultType="com.example.BlessingChess.data.po.GreetingCard">
+        SELECT * from card
+        <where>
+            sender_id = #{id}
+        </where>
+    </select>
+    <!--查询用户收到的贺卡-->
+    <select id="selectByReceiverId" resultType="com.example.BlessingChess.data.po.GreetingCard">
+        SELECT card.* from card, card_receiver_relations
+        <where>
+            card_receiver_relations.receiver_id = #{id}
+            and card_receiver_relations.card_id = card.id
+        </where>
+    </select>
+    <!--获取某张贺卡被收到的总次数-->
+    <select id="countReceiver" resultType="java.lang.Integer">
+        SELECT count(*) from card_receiver_relations
+        <where>
+            card_id = #{cardId}
+        </where>
+    </select>
+    <!--查询用户还没收到过的贺卡-->
+    <select id="selectNewCard" resultType="com.example.BlessingChess.data.po.GreetingCard">
+        SELECT card.* from card
+        <where>
+            card.id not in
+            (
+            SELECT card_id from card_receiver_relations
+            <where>
+                receiver_id = #{id}
+            </where>
+            )
+        </where>
+    </select>
+    <!--插入新贺卡-->
+    <insert id="insertNewCard" parameterType="com.example.BlessingChess.data.po.GreetingCard">
+        INSERT INTO card (sender_id, delivery_time, content, icon, background)
+        VALUES (#{senderId}, #{deliveryTime}, #{content}, #{icon}, #{background})
+    </insert>
+    <!--根据cardId更新贺卡类中的非空元素-->
+    <update id="updateCard" parameterType="com.example.BlessingChess.data.po.GreetingCard">
+        UPDATE card
+        <set>
+            <if test="content != null">
+                content = #{content},
+            </if>
+            <if test="icon != null">
+                icon = #{icon},
+            </if>
+            <if test="background != null">
+                background = #{background},
+            </if>
+        </set>
+        <where>
+            id = #{id}
+        </where>
+    </update>
+    <!--根据cardId删除贺卡-->
+    <delete id="deleteCard" parameterType="java.lang.Integer">
+        DELETE FROM card
+        <where>
+            id = #{cardId}
+        </where>
+    </delete>
+    <!--新增贺卡关系-->
+    <insert id="newCardRelation" parameterType="com.example.BlessingChess.data.po.CardReceiverRelations">
+        INSERT INTO card_receiver_relations (card_id, receiver_id)
+        VALUES (#{cardId}, #{receiverId})
+    </insert>
+</mapper>

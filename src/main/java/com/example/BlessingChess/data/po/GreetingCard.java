@@ -3,6 +3,7 @@ package com.example.BlessingChess.data.po;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.example.BlessingChess.data.dto.GreetingCardReceiver;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
- * 贺卡的持久对象实体类，用于在数据库中存储和管理祝福信息。
+ * 贺卡的持久对象实体类，用于在数据库中存储和管理贺卡信息。
  *
  * @author LRQ LXY
  * @version 1.1
@@ -54,4 +55,16 @@ public class GreetingCard {
      * 贺卡的背景图片URL。
      */
     private String background;
+
+    /**
+     * 用于直接通过dto构建新贺卡对象的构造方法
+     * @param greetingCardReceiver 前端传入的dto
+     */
+    public GreetingCard(GreetingCardReceiver greetingCardReceiver){
+        setSenderId(greetingCardReceiver.getSenderId());
+        setContent(greetingCardReceiver.getContent());
+        setIcon(greetingCardReceiver.getIconUrl());
+        setBackground(greetingCardReceiver.getBackgroundUrl());
+        setDeliveryTime(LocalDateTime.now());
+    }
 }

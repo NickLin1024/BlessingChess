@@ -44,7 +44,7 @@ public class GreetingCardController {
      * @param id 用户的ID
      * @return 查询结果，包含新贺卡的信息
      */
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public Result selectNewCard(@PathVariable Integer id){
         return greetingCardService.selectNewCard(id);
     }
@@ -55,20 +55,20 @@ public class GreetingCardController {
      * @param cardId 需要删除的贺卡id
      * @return 删除的结果，若成功返回ok
      */
-    @DeleteMapping("{cardId}")
+    @DeleteMapping("/{cardId}")
     public Result deleteCard(@PathVariable Integer cardId){
         return greetingCardService.deleteCard(cardId);
     }
 
 
     /**
-     * 删除对应id的贺卡
+     * 更新对应id的贺卡
      *
      * @param cardId 需要修改的贺卡id
      * @param greetingCardReceiver 前端提供的修改信息，若无需修改的变量为null
      * @return 删除的结果，若成功返回ok
      */
-    @PutMapping("{cardId}")
+    @PutMapping("/{cardId}")
     public Result updateCard(@PathVariable Integer cardId,GreetingCardReceiver greetingCardReceiver){
         return greetingCardService.updateCard(cardId,greetingCardReceiver);
     }

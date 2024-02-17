@@ -19,14 +19,14 @@
             and card_receiver_relations.card_id = card.id
         </where>
     </select>
-    <!--获取某张贺卡被收到的总次数-->
+    <!--获取某张贺卡被点亮的总次数-->
     <select id="countReceiver" resultType="java.lang.Integer">
         SELECT count(*) from card_receiver_relations
         <where>
             card_id = #{cardId}
         </where>
     </select>
-    <!--查询用户还没收到过的贺卡-->
+    <!--查询用户还没点亮过的贺卡-->
     <select id="selectNewCard" resultType="com.example.BlessingChess.data.po.GreetingCard">
         SELECT card.* from card
         <where>

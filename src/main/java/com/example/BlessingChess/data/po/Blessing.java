@@ -68,6 +68,11 @@ public class Blessing {
     private boolean isViewed;
 
     /**
+     *
+     */
+    private boolean isPublic;
+
+    /**
      * 用于直接通过dto构建新贺卡对象的构造方法
      * @param blessingReceiver 前端传入的dto
      */
@@ -77,5 +82,6 @@ public class Blessing {
         setIcon(blessingReceiver.getIconUrl());
         setBackground(blessingReceiver.getBackgroundUrl());
         setDeliveryTime(LocalDateTime.now());
+        setPublic(blessingReceiver.getIsPublic());
     }
 }

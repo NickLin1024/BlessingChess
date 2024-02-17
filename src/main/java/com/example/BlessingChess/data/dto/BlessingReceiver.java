@@ -21,4 +21,5 @@ public class BlessingReceiver {
     private String content;
     private String iconUrl;
     private String backgroundUrl;
+    private Boolean isPublic;
     }

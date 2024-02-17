@@ -42,6 +42,7 @@ CREATE TABLE BlessingChess.blessing (
 	icon TEXT NULL,
 	background TEXT NULL,
 	is_viewed BOOL NOT NULL,
+	public BOOL NOT NULL,
 	CONSTRAINT blessing_pk PRIMARY KEY (id)
 )
 ENGINE=InnoDB

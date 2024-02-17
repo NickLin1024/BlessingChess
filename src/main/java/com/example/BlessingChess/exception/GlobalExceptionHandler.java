@@ -25,6 +25,6 @@ public class GlobalExceptionHandler {
         e.printStackTrace();	//打印堆栈中的异常信息
 
         //捕获到异常之后，响应一个标准的Result
-        return Result.error(500,"操作失败,请联系管理员错误"+e.getMessage());
+        return Result.error(0,"操作失败,请联系管理员错误"+e.getMessage());
     }
 }

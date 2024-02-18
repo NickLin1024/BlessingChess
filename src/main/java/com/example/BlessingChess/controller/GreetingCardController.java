@@ -72,4 +72,15 @@ public class GreetingCardController {
     public Result updateCard(@PathVariable Integer cardId,GreetingCardReceiver greetingCardReceiver){
         return greetingCardService.updateCard(cardId,greetingCardReceiver);
     }
+
+    /**
+     * 根据cardID查询所有该贺卡的点亮次数。
+     *
+     * @param cardId 用户的ID
+     * @return 查询结果，包含贺卡被点亮的次数
+     */
+    @GetMapping("/view/{cardId}")
+    public Result viewSelectByCardId(@PathVariable Integer cardId){
+        return greetingCardService.lightCard(cardId);
+    }
 }

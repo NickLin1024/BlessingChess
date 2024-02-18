@@ -64,15 +64,15 @@ public class GreetingCardService {
     /**
      * 删除对应id的贺卡
      *
-     * @param cardId 需要删除的贺卡id
+     * @param id 需要删除的贺卡id
      * @return 删除的结果，若成功返回ok
      */
-    public Result deleteCard(Integer cardId){
+    public Result deleteCard(Integer id){
         //TODO 健壮性！！比如确定该贺卡是否存在
-//        if (greetingCardMapper.selectById(cardId) == null) {
-//            return Result.error(0,"没有此贺卡,无法删除");
-//        }
-        greetingCardMapper.deleteCard(cardId);
+      if (greetingCardMapper.isCard(id) == 0) {
+            return Result.error(0,"没有此贺卡,无法删除");
+        }
+        greetingCardMapper.deleteCard(id);
         return Result.ok();
     }
 
@@ -85,9 +85,9 @@ public class GreetingCardService {
      */
     public Result updateCard(Integer id,GreetingCardReceiver greetingCardReceiver){
         //TODO 健壮性！！比如确定该贺卡是否存在
-//        if (greetingCardMapper.selectById(id) == null) {
-//            return Result.error(0,"没有此贺卡,无法更新");
-//        }
+        if (greetingCardMapper.isCard(id) == 0) {
+            return Result.error(0,"没有此贺卡,无法更新");
+        }
         GreetingCard greetingCard = new GreetingCard(greetingCardReceiver);
         greetingCard.setId(id);
         greetingCardMapper.updateCard(greetingCard);

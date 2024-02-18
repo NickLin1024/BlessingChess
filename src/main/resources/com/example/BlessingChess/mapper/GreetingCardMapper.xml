@@ -74,4 +74,11 @@
         INSERT INTO card_receiver_relations (card_id, receiver_id)
         VALUES (#{cardId}, #{receiverId})
     </insert>
+    <!--根据cardid查询贺卡存在-->
+    <select id="isCard" resultType="java.lang.Integer">
+        SELECT count(*) from card
+        <where>
+            id = #{id}
+        </where>
+    </select>
 </mapper>

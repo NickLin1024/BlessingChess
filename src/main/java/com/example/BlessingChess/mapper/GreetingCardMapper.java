@@ -14,7 +14,7 @@ import java.util.List;
  * @since 2024-2-16
  */
 @Mapper
-public interface GreetingCardMapper extends BaseMapper<GreetingCard> {
+public interface GreetingCardMapper  {
 
     /**
      * 根据发送者 ID 查询 GreetingCard 列表。
@@ -65,9 +65,15 @@ public interface GreetingCardMapper extends BaseMapper<GreetingCard> {
     /**
      * 根据cardId删除贺卡
      *
-     * @param card_id 需要删除的贺卡的id
+     * @param id 需要删除的贺卡的id
      */
-    public void deleteCard(Integer card_id);
+    public void deleteCard(Integer id);
+    /**
+     * 根据cardId确认贺卡是否存在
+     *
+     * @param id 需要查询的贺卡的id
+     */
+    public Integer isCard(Integer id);
 
     public void newCardRelation(CardReceiverRelations cardReceiverRelations);
 }

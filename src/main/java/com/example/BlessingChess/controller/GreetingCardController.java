@@ -62,7 +62,7 @@ public class GreetingCardController {
 
 
     /**
-     * 删除对应id的贺卡
+     * 更新对应id的贺卡
      *
      * @param cardId 需要修改的贺卡id
      * @param greetingCardReceiver 前端提供的修改信息，若无需修改的变量为null

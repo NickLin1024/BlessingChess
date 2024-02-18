@@ -66,6 +66,11 @@ public class Blessing {
      * true表示已查看，false表示未查看。
      */
     private boolean isViewed;
+    /**
+     * 标识该祝福是否仅好友可见.
+     * true表示所有人可见，false表示仅好友可见。
+     */
+    private boolean isVisible;
 
     /**
      *

@@ -7,6 +7,8 @@ import com.example.BlessingChess.mapper.GreetingCardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Random;
+
 /**
  * 贺卡服务类，提供对贺卡数据的相关操作。
  *
@@ -57,8 +59,10 @@ public class GreetingCardService {
      * @return 查询结果，包含新贺卡的信息
      */
     public Result selectNewCard(Integer id){
+        Random random = new Random();
+       ;
         //TODO selectNewCard方法是所有可选贺卡的集合，要从中随机选一个，然后用mapper中已经写好的方法，把这个新贺卡的获取信息放入中间表
-        return Result.success(greetingCardMapper.selectNewCard(id),"success");
+        return Result.success( greetingCardMapper.selectNewCard(id).get(random.nextInt(greetingCardMapper.selectNewCard(id).size())),"success");
     }
 
     /**

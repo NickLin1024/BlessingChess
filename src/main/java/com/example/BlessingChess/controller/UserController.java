@@ -32,4 +32,10 @@ public class UserController {
         return userService.userData(id);
     }
 
+    //更新棋盘数据
+    @PostMapping("/user/chessboard")
+    public Result updateChessBoard(@RequestParam Integer id, @RequestParam int diceNum, int position) {
+        return userService.updateChessBoard(id, diceNum, position);
+    }
+
 }

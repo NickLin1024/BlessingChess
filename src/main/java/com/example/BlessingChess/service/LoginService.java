@@ -141,7 +141,7 @@ public class LoginService {
             user.setOpenId(loginData.getCode());
             user.setLastTime(LocalDateTime.now());
             user.setUsername(loginData.getWxUsername());
-
+            user.setInvitationCode(randomUtil.RandomInvitationCode());
             //在数据库中插入新用户
             userMapper.insertNewUser(user);
         }

@@ -49,7 +49,7 @@ public class LoginCheckFilter implements Filter {
 
 
         //获取请求头中的令牌（token）
-        String token = request.getHeader("token");
+        String token = request.getHeader("Authorization").substring(7);
 
 
         //判断令牌是否存在，如果不存在，返回错误

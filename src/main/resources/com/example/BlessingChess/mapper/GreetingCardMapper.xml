@@ -38,6 +38,7 @@
             </where>
             )
         </where>
+
     </select>
     <!--插入新贺卡-->
     <insert id="insertNewCard" parameterType="com.example.BlessingChess.data.po.GreetingCard">

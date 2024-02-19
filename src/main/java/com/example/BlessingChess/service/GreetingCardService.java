@@ -1,11 +1,14 @@
 package com.example.BlessingChess.service;
 
 import com.example.BlessingChess.data.dto.GreetingCardReceiver;
+import com.example.BlessingChess.data.po.CardReceiverRelations;
 import com.example.BlessingChess.data.po.GreetingCard;
 import com.example.BlessingChess.data.vo.Result;
 import com.example.BlessingChess.mapper.GreetingCardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Random;
 
 /**
  * 贺卡服务类，提供对贺卡数据的相关操作。
@@ -57,8 +60,18 @@ public class GreetingCardService {
      * @return 查询结果，包含新贺卡的信息
      */
     public Result selectNewCard(Integer id){
+        Random random = new Random();
+        Integer length = greetingCardMapper.selectNewCard(id).size();
+        if (length <= 0) {
+            return Result.error(0,"没有剩余贺卡");
+        }
+        GreetingCard r = greetingCardMapper.selectNewCard(id).get(random.nextInt(0,length));
+        CardReceiverRelations cardReceiverRelations = new CardReceiverRelations();
+        cardReceiverRelations.setReceiverId(id);
+        cardReceiverRelations.setCardId(r.getId());
+        greetingCardMapper.newCardRelation(cardReceiverRelations);
         //TODO selectNewCard方法是所有可选贺卡的集合，要从中随机选一个，然后用mapper中已经写好的方法，把这个新贺卡的获取信息放入中间表
-        return Result.success(greetingCardMapper.selectNewCard(id),"success");
+        return Result.success(r ,"success");
     }
 
     /**
@@ -92,5 +105,19 @@ public class GreetingCardService {
         greetingCard.setId(id);
         greetingCardMapper.updateCard(greetingCard);
         return Result.ok();
+    }
+
+    /**
+     * 删除对应id的贺卡
+     *
+     * @param cardId 需要修改的贺卡id
+     *
+     * @return 贺卡被点亮的次数，若成功返回ok
+     */
+    public Result lightCard(Integer cardId) {
+        if (greetingCardMapper.isCard(cardId) == 0) {
+            return Result.error(0,"没有此贺卡");
+        }
+        return Result.success(greetingCardMapper.countReceiver(cardId),"success");
     }
 }

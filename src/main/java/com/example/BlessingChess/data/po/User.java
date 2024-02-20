@@ -19,7 +19,6 @@ import java.util.Map;
  * @author LXY LJY
  */
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @TableName("user")
 public class User {
@@ -59,17 +58,30 @@ public class User {
      */
     private String invitationCode;
 
+    private int diceNum;
+
+    private int position;
+
     /**
      * 将用户信息转换成Map包装进token
      * @return 用户信息的Map
      */
+
+    //user实例初始化
+    public User(){
+        diceNum = 10;
+        position = 0;
+    }
+
     public Map<String, Object> toMap() {
         Map<String, Object> userMap = new HashMap<>();
         userMap.put("id", getId());
         userMap.put("openId", getOpenId());
         userMap.put("lastTime", getLastTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));  //转为前端能解析的格式
         userMap.put("username", getUsername());
-        userMap.put("invitationCode",invitationCode);
+        userMap.put("invitationCode", invitationCode);
+        userMap.put("diceNum", diceNum);
+        userMap.put("position", position);
         return userMap;
     }
 }

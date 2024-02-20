@@ -11,8 +11,12 @@ public interface UserMapper extends BaseMapper<User> {
     @Select("select * from user where open_id = #{openId}")
     User findUserByOpenId(String openId);
 
+    //根据邀请码查找用户
     @Select("select * from user where invitation_code = #{invitationCode}")
     User findUserByInvitationCode(String invitationCode);
+
+    @Select("select * from user where id = #{id}")
+    User findUserById(int id);
 
     //会自动将生成的id值，赋值给user对象的id属性
     @Options(useGeneratedKeys = true,keyProperty = "id")

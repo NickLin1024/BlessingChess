@@ -1,13 +1,12 @@
 package com.example.BlessingChess.controller;
 
 import com.example.BlessingChess.data.dto.LoginData;
+import com.example.BlessingChess.data.po.User;
 import com.example.BlessingChess.data.vo.Result;
 import com.example.BlessingChess.service.LoginService;
+import com.example.BlessingChess.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
@@ -16,12 +15,27 @@ public class UserController {
     @Autowired
     LoginService loginService;//调用登录Service
 
+    @Autowired
+    UserService userService;
+
     //登录用接口
     @PostMapping("/login")
     public Result handleLogin(@RequestBody LoginData loginData) {
 
         //传入登录信息，并返回Token
         return loginService.testGetToken(loginData);
+    }
+
+    //查询用户数据接口
+    @PostMapping("/user/data")
+    public Result userData(@RequestParam Integer id) {
+        return userService.userData(id);
+    }
+
+    //更新棋盘数据
+    @PostMapping("/user/chessboard")
+    public Result updateChessBoard(@RequestParam Integer id, @RequestParam int diceNum, int position) {
+        return userService.updateChessBoard(id, diceNum, position);
     }
 
 }

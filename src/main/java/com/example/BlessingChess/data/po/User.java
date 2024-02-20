@@ -58,9 +58,9 @@ public class User {
      */
     private String invitationCode;
 
-    private int diceNum;
+    private Integer diceNum;
 
-    private int position;
+    private Integer position;
 
     /**
      * 将用户信息转换成Map包装进token

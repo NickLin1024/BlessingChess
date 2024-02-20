@@ -18,7 +18,7 @@
 ## 数据库结构
 
 ```sql
-CREATE DATABASE `BlessingChess`
+CREATE DATABASE `BlessingChess`;
 -- 创建用户表
 CREATE TABLE BlessingChess.`user` (
 	id INTEGER auto_increment NOT NULL,
@@ -27,6 +27,8 @@ CREATE TABLE BlessingChess.`user` (
 	last_time DATE NULL,
 	username TEXT NOT NULL,
 	invitation_code TEXT NOT NULL,
+	dice_num INTEGER NOT NULL,
+	position INTEGER NOT NULL,
 	CONSTRAINT user_pk PRIMARY KEY (id)
 )
 ENGINE=InnoDB

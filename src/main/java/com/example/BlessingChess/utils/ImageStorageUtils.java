@@ -1,5 +1,8 @@
 package com.example.BlessingChess.utils;
 
+import com.example.BlessingChess.config.HttpConverterConfig;
+import com.example.BlessingChess.data.po.ImageData;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -22,7 +25,8 @@ public class ImageStorageUtils {
     /**
      * 上传目录的静态路径前缀。
      */
-    private static final String UPLOAD_DIRECTORY = "E:/StudentOnline/BlessingChess/image";
+    @Value("${uploadDirectory}")
+    private String uploadDirectory = HttpConverterConfig.uploadDirectory;
 
     /**
      * 图片存储目录。
@@ -56,7 +60,7 @@ public class ImageStorageUtils {
         String fileName = UUID.randomUUID().toString() + "." + getFileExtension(file.getOriginalFilename());
 
         // 构建保存路径
-        String savePath = UPLOAD_DIRECTORY + directory + userId.toString() + "/";
+        String savePath = uploadDirectory + directory + "/"+userId.toString() + "/";
         File saveDir = new File(savePath);
 
         // 如果目录不存在，则创建目录
@@ -70,6 +74,7 @@ public class ImageStorageUtils {
         // 保存文件
         try {
             Files.copy(file.getInputStream(), saveFilePath);
+
         } catch (IOException e) {
             throw new RuntimeException("Failed to store image");
         }
@@ -89,32 +94,49 @@ public class ImageStorageUtils {
     }
 
     /**
-     * 获取指定用户ID和目录下的所有图片文件的绝对路径列表。
+     * 获取指定用户ID目录下的和公共的图片文件的绝对路径列表。
      *
      * @param userId      用户ID，用于定位用户的特定目录
      * @return            包含所有图片文件绝对路径的列表；如果目录不存在或不是目录，将抛出异常
      * @throws IllegalArgumentException 如果指定的路径不存在或不是一个目录
      */
-    public List<String> getAllImagePathsForUser(Integer userId) {
-        String directoryPath ="/image" + directory + userId.toString() + "/";
+    public List<ImageData> getImagePathsForUser(Integer userId) {
+        //获取公共的图片
+        List<ImageData> filePaths = getImagePaths(0);
+        //添加用户的图片
+        filePaths.addAll(getImagePaths(userId));
+        return filePaths;
+    }
+
+    /**
+     * 获取指定ID目录下的所有图片文件的绝对路径列表。
+     *
+     * @param id      用户ID，用于定位用户的特定目录
+     * @return            包含所有图片文件绝对路径的列表；如果目录不存在或不是目录，将抛出异常
+     * @throws IllegalArgumentException 如果指定的路径不存在或不是一个目录
+     */
+    public List<ImageData> getImagePaths(Integer id) {
+        String directoryPath =uploadDirectory + directory + "/" + id.toString() + "/";
         File directories = new File(directoryPath);
 
         // 验证目录是否存在
-        if (!directories.exists() || !directories.isDirectory()) {
-            throw new IllegalArgumentException("Directory does not exist or is not a directory: " + directoryPath);
+        if (!directories.exists()  || !directories.isDirectory()) {
+            return new ArrayList<ImageData>();
         }
 
         // 收集所有文件的路径
-        List<String> filePaths = new ArrayList<>();
+        List<ImageData> filePaths = new ArrayList<>();
         File[] files = directories.listFiles();
         if (files != null) {
             for (File file : files) {
                 if (file.isFile()) {
-                    filePaths.add(file.getAbsolutePath());
+                    filePaths.add(new ImageData("/image/" +
+                            file.getAbsolutePath()  //将文件路径转化为url路径
+                                    .substring(uploadDirectory.length())
+                                    .replace("\\", "/"),id));
                 }
             }
         }
-
         return filePaths;
     }
 }

@@ -9,7 +9,6 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 @SpringBootApplication
 @MapperScan("com.example.BlessingChess.mapper")
 public class BlessingChessApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(BlessingChessApplication.class, args);
 	}

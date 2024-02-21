@@ -57,7 +57,7 @@ public class ImageStorageUtils {
         }
 
         // 生成UUID作为文件名
-        String fileName = UUID.randomUUID().toString() + "." + getFileExtension(file.getOriginalFilename());
+        String fileName = UUID.randomUUID().toString() + getFileExtension(file.getOriginalFilename());
 
         // 构建保存路径
         String savePath = uploadDirectory + directory + "/"+userId.toString() + "/";
@@ -131,8 +131,11 @@ public class ImageStorageUtils {
             for (File file : files) {
                 if (file.isFile()) {
                     filePaths.add(new ImageData("/image/" +
-                            file.getAbsolutePath()  //将文件路径转化为url路径
-                                    .substring(uploadDirectory.length())
+                            directory +
+                            "/" +
+                            id.toString() +
+                                file.getAbsolutePath()  //将文件路径转化为url路径
+                                    .substring(directories.getAbsolutePath().length())
                                     .replace("\\", "/"),id));
                 }
             }

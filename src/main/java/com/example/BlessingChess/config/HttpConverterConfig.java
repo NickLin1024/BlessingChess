@@ -19,7 +19,7 @@ public class HttpConverterConfig implements WebMvcConfigurer {
      * 上传和读取图片的目录路径。
      * 该目录应存在且应用程序应具有写入权限。
      */
-    public static final String uploadDirectory = "./image/";//使用相对路径，image在项目的根路径中（最大的那个）
+    public static final String uploadDirectory = "image/";//使用相对路径，image在项目的根路径中（最大的那个）
 
     /**
      * 配置资源处理器，用于从指定目录提供静态资源。

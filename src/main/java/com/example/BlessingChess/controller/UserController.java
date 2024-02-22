@@ -27,14 +27,14 @@ public class UserController {
     }
 
     //查询用户数据接口
-    @PostMapping("/user/data")
-    public Result userData(@RequestParam Integer id) {
+    @PostMapping("/data/{id}")
+    public Result userData(@PathVariable Integer id) {
         return userService.userData(id);
     }
 
     //更新棋盘数据
-    @PostMapping("/user/chessboard")
-    public Result updateChessBoard(@RequestParam Integer id, @RequestParam int diceNum, int position) {
+    @PostMapping("/chessboard/{id}")
+    public Result updateChessBoard(@PathVariable Integer id, @RequestParam Integer diceNum, Integer position) {
         return userService.updateChessBoard(id, diceNum, position);
     }
 

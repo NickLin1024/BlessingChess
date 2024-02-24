@@ -70,12 +70,7 @@ public class Blessing {
      * 标识该祝福是否仅好友可见.
      * true表示所有人可见，false表示仅好友可见。
      */
-    private boolean isVisible;
-
-    /**
-     *
-     */
-    private boolean isPublic;
+   private boolean isPublic;
 
     /**
      * 用于直接通过dto构建新贺卡对象的构造方法

@@ -68,4 +68,14 @@ public class BlessingController {
     public Result updateCard(@PathVariable Integer blessingId,BlessingReceiver blessingReceiver){
         return blessingService.updateBlessing(blessingId,blessingReceiver);
     }
+    /**
+     * 根据用户ID查询一个该用户将要收到的祝福。
+     *
+     * @param id 用户的ID
+     * @return 查询结果，包含祝福信息的列表
+     */
+    @GetMapping("/{id}")
+    public Result selectNewByReceiverId(@PathVariable Integer id){
+        return blessingService.selectNewByReceiverId(id);
+    }
 }

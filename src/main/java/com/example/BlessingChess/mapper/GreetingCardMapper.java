@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.BlessingChess.data.po.CardReceiverRelations;
 import com.example.BlessingChess.data.po.GreetingCard;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+
 import java.util.List;
 
 
@@ -76,5 +78,7 @@ public interface GreetingCardMapper extends BaseMapper<GreetingCard> {
     public Integer isCard(Integer id);
 
     public void newCardRelation(CardReceiverRelations cardReceiverRelations);
+    @Select("select * from GreetingCard ")
+    public List<GreetingCard> selectAllCard();
 }
 

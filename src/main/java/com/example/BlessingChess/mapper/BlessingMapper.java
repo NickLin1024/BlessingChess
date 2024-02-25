@@ -26,7 +26,7 @@ public interface BlessingMapper extends BaseMapper<Blessing> {
      * @param id 接收者的 ID
      * @return Blessing 列表，包含所有发送给指定接收者的卡片
      */
-    @Select("select * from blessing where receiver_id = #{id}")
+    @Select("select * from blessing where receiver_id = #{id} and is_viewed = 1")
     public List<Blessing> selectByReceiverId(Integer id);
 
     /**
@@ -55,4 +55,7 @@ public interface BlessingMapper extends BaseMapper<Blessing> {
 
     @Select("select * from blessing where id = #{id}")
     Blessing selectByBlessingId(Integer id);
+
+    @Select("select * from blessing where receiver_id = #{id} and is_viewed = 0")
+    public List<Blessing> selectNewByReceiverId(Integer id);
 }

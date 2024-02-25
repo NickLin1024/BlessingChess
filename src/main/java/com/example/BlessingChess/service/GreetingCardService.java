@@ -1,6 +1,7 @@
 package com.example.BlessingChess.service;
 
 import com.example.BlessingChess.data.dto.GreetingCardReceiver;
+import com.example.BlessingChess.data.po.Blessing;
 import com.example.BlessingChess.data.po.CardReceiverRelations;
 import com.example.BlessingChess.data.po.GreetingCard;
 import com.example.BlessingChess.data.vo.Result;
@@ -8,6 +9,7 @@ import com.example.BlessingChess.mapper.GreetingCardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -60,12 +62,13 @@ public class GreetingCardService {
      * @return 查询结果，包含新贺卡的信息
      */
     public Result selectNewCard(Integer id){
+        List<GreetingCard> list = greetingCardMapper.selectNewCard(id);
         Random random = new Random();
-        Integer length = greetingCardMapper.selectNewCard(id).size();
+        Integer length = list.size();
         if (length <= 0) {
             return Result.error(0,"没有剩余贺卡");
         }
-        GreetingCard r = greetingCardMapper.selectNewCard(id).get(random.nextInt(0,length));
+        GreetingCard r = list.get(random.nextInt(0,length));
         CardReceiverRelations cardReceiverRelations = new CardReceiverRelations();
         cardReceiverRelations.setReceiverId(id);
         cardReceiverRelations.setCardId(r.getId());
@@ -120,4 +123,18 @@ public class GreetingCardService {
         }
         return Result.success(greetingCardMapper.countReceiver(cardId),"success");
     }
+    /**
+     * 根据用户ID查询所有该用户发收的贺卡。
+     *
+     * @param id 用户的ID
+     * @return 查询结果，包含贺卡信息的列表,如果错误返回error
+     */
+    public Result selectBySenderId(Integer id){
+        //TODO 健壮性！！
+        if (id == null) {
+            return Result.error(0,"id不能为空");
+        }
+        return Result.success(greetingCardMapper.selectBySenderId(id),"success");
+    }
+    
 }

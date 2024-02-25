@@ -2,11 +2,15 @@ package com.example.BlessingChess.service;
 
 import com.example.BlessingChess.data.dto.BlessingReceiver;
 import com.example.BlessingChess.data.po.Blessing;
+import com.example.BlessingChess.data.po.GreetingCard;
 import com.example.BlessingChess.data.vo.Result;
 import com.example.BlessingChess.mapper.BlessingMapper;
 import com.example.BlessingChess.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Random;
 
 @Service
 public class BlessingService {
@@ -100,4 +104,26 @@ public class BlessingService {
         blessingMapper.deleteBlessing(id);
         return Result.ok();
     }
+    /**
+     * 根据用户ID查询随机一个该用户未点亮的祝福。
+     *
+     * @param id 用户的ID
+     * @return 查询结果，包含贺卡信息的列表,如果错误返回error
+     */
+    public Result selectNewByReceiverId(Integer id){
+        Random random = new Random();
+        if (id == null) {
+            return Result.error(0,"id不能为空");
+        }
+        List<Blessing> list = blessingMapper.selectNewByReceiverId(id);
+        Integer length = list.size();
+        if (length <= 0) {
+            return Result.error(0,"没有剩余祝福");
+        }
+        Blessing b = list.get(random.nextInt(0,length));
+        b.setViewed(true);
+        blessingMapper.updateBlessing(b);
+        return Result.success(b,"success");
+    }
+
 }

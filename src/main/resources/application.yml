@@ -9,11 +9,11 @@ spring:
       enabled: false
   servlet:
     multipart:
+      enabled: true
       # 上传文件总的最大值
       max-request-size: 10MB
       # 单个文件的最大值
-      max-file-size: 5MB
-uploadDirectory: E:/StudentOnline/BlessingChess/image/
+      max-file-size: 10MB
 server:
   port: 8080
 mybatis-plus:

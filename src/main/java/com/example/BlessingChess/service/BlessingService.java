@@ -44,31 +44,35 @@ public class BlessingService {
 
     /**
      * 插入新祝福
-     * @param blessingReceiver
+     * @param blessingReceiver 前端传入的dto数据
      * @return Result.ok()
      */
     public Result insertNewBlessing(BlessingReceiver blessingReceiver) {
         if (blessingReceiver == null) {
-            return Result.error(0,"前端用户格式错误");
+            return Result.error(0,"用户格式错误");
         }
         if (blessingReceiver.getInvitationCode() == null) {
-            return Result.error(0,"前端用户邀请码为空");
+            return Result.error(0,"用户邀请码为空");
         }
         Blessing blessing =new Blessing(blessingReceiver);
         blessing.setViewed(false);
-        blessing.setReceiverId(userMapper.findUserByInvitationCode(blessingReceiver.getInvitationCode()).getId());
-        blessingMapper.insertNewBlessing(blessing);
+        try {
+            blessing.setReceiverId(userMapper.findUserByInvitationCode(blessingReceiver.getInvitationCode()).getId());
+            blessingMapper.insertNewBlessing(blessing);
+        }catch (NullPointerException e){    //假如邀请码不存在
+            return Result.error(0,"邀请码不存在！");
+        }
         return Result.ok();
     }
 
     /**
      * 更改祝福
-     * @param blessingReceiver
+     * @param blessingReceiver 前端传入的dto数据
      * @return Result.ok()
      */
     public Result updateBlessing(Integer id,BlessingReceiver blessingReceiver) {
         if (blessingReceiver == null) {
-            return Result.error(0,"前端用户格式错误");
+            return Result.error(0,"用户格式错误");
         }
         if (blessingMapper.selectByBlessingId(id) == null) {
             return Result.error(0,"无此贺卡,无法更改");

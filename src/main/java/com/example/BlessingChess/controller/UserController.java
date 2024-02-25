@@ -27,7 +27,7 @@ public class UserController {
     }
 
     //查询用户数据接口
-    @PostMapping("/data/{id}")
+    @GetMapping("/data/{id}")
     public Result userData(@PathVariable Integer id) {
         return userService.userData(id);
     }

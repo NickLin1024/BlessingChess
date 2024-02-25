@@ -17,7 +17,7 @@ public interface BlessingMapper extends BaseMapper<Blessing> {
      * @param id 发送者的 ID
      * @return Blessing 列表，包含所有由指定发送者发送的卡片
      */
-    @Select("select * from blessing where sender_id = #{id}")
+    @Select("select id,sender_id,receiver_id,delivery_time,content,icon,background,is_viewed,is_public from blessing where sender_id = #{id}")
      List<Blessing> selectBySenderId(Integer id);
 
     /**

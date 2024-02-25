@@ -3,13 +3,13 @@ package com.example.BlessingChess.service;
 import com.example.BlessingChess.data.po.User;
 import com.example.BlessingChess.data.vo.Result;
 import com.example.BlessingChess.mapper.UserMapper;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
 
-    @Resource
+    @Autowired
     UserMapper userMapper;
 
     //返回user数据

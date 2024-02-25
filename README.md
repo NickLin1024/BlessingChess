@@ -37,9 +37,9 @@ COLLATE=utf8mb4_0900_ai_ci;
 -- 创建祝福表
 CREATE TABLE BlessingChess.blessing (
 	id INTEGER auto_increment NOT NULL,
-	`sender-id` INTEGER NOT NULL,
-	`receiver-id` INTEGER NOT NULL,
-	`delivery-time` DATE NULL,
+	`sender_id` INTEGER NOT NULL,
+	`receiver_id` INTEGER NOT NULL,
+	`delivery-_time` DATE NULL,
 	content TEXT NULL,
 	icon TEXT NULL,
 	background TEXT NULL,

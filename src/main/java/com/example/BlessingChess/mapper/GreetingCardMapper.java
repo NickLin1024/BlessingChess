@@ -14,7 +14,7 @@ import java.util.List;
  * @since 2024-2-16
  */
 @Mapper
-public interface GreetingCardMapper  {
+public interface GreetingCardMapper extends BaseMapper<GreetingCard> {
 
     /**
      * 根据发送者 ID 查询 GreetingCard 列表。

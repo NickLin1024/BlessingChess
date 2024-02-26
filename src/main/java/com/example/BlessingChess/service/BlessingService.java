@@ -81,8 +81,11 @@ public class BlessingService {
         if (blessingMapper.selectByBlessingId(id) == null) {
             return Result.error(0,"无此贺卡,无法更改");
         }
+        if (blessingMapper.selectByBlessingId(id).isViewed()) {
+            return Result.error(0,"已查看祝福不能删除");
+        }
         Blessing blessing =new Blessing(blessingReceiver);
-        blessing.setViewed(false);
+        blessing.setId(id);
         blessing.setReceiverId(userMapper.findUserByInvitationCode(blessingReceiver.getInvitationCode()).getId());
         blessingMapper.updateBlessing(blessing);
         return Result.ok();

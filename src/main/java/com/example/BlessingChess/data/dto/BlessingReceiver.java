@@ -16,7 +16,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BlessingReceiver {
-    private Integer senderId;
     private String invitationCode;
     private String content;
     private String iconUrl;

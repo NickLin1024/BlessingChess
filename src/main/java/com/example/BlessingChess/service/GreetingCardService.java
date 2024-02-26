@@ -84,16 +84,18 @@ public class GreetingCardService {
      * @return 删除的结果，若成功返回ok
      */
     public Result deleteCard(Integer id){
-        //TODO 健壮性！！比如确定该贺卡是否存在
       if (greetingCardMapper.isCard(id) == 0) {
             return Result.error(0,"没有此贺卡,无法删除");
         }
-        greetingCardMapper.deleteCard(id);
-        return Result.ok();
+      if (greetingCardMapper.countReceiver(id) != 0) {
+          return Result.error(0, "贺卡已被点亮，无法删除~");
+      }
+      greetingCardMapper.deleteCard(id);
+      return Result.ok();
     }
 
     /**
-     * 删除对应id的贺卡
+     * 更新对应id的贺卡
      *
      * @param id 需要修改的贺卡id
      * @param greetingCardReceiver 前端提供的修改信息，若无需修改的变量为null
@@ -103,6 +105,9 @@ public class GreetingCardService {
         //TODO 健壮性！！比如确定该贺卡是否存在
         if (greetingCardMapper.isCard(id) == 0) {
             return Result.error(0,"没有此贺卡,无法更新");
+        }
+        if (greetingCardMapper.countReceiver(id) != 0) {
+            return Result.error(0, "贺卡已被点亮，无法更改~");
         }
         GreetingCard greetingCard = new GreetingCard(greetingCardReceiver);
         greetingCard.setId(id);

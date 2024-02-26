@@ -93,5 +93,15 @@ public class GreetingCardController {
     public Result selectBySenderId(@PathVariable Integer id){
         return greetingCardService.selectBySenderId(id);
     }
+    /**
+     * 根据用户ID查询所有贺卡。
+     *
+     *
+     * @return 查询结果，包含贺卡信息的列表
+     */
+    @GetMapping("/")
+    public Result selectAllCard(){
+        return greetingCardService.selectAllCard();
+    }
 
 }

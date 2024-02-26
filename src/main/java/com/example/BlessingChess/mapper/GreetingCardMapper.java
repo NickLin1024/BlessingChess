@@ -78,7 +78,7 @@ public interface GreetingCardMapper extends BaseMapper<GreetingCard> {
     public Integer isCard(Integer id);
 
     public void newCardRelation(CardReceiverRelations cardReceiverRelations);
-    @Select("select * from GreetingCard ")
+    @Select("select * from card ")
     public List<GreetingCard> selectAllCard();
 }
 

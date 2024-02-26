@@ -136,5 +136,15 @@ public class GreetingCardService {
         }
         return Result.success(greetingCardMapper.selectBySenderId(id),"success");
     }
-    
+
+    /**
+     * 根据用户ID查询所有贺卡。
+     *
+     *
+     * @return 查询结果，包含贺卡信息的列表
+     */
+    public Result selectAllCard(){
+        return Result.success(greetingCardMapper.selectAllCard(),"success");
+    }
+
 }

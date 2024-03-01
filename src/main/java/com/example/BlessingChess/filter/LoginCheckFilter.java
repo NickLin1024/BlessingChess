@@ -42,15 +42,25 @@ public class LoginCheckFilter implements Filter {
 
 
         //判断请求url中是否包含login，如果包含，说明是登录操作，放行
-        if(url.contains("/user/login")||url.contains("/test")){
+        if(url.contains("/user/login")||url.contains("/test")||url.contains("/image")){
             chain.doFilter(request, response);//放行请求
             return;//结束当前方法的执行
         }
 
+        String token;
 
-        //获取请求头中的令牌（token）
-        String token = request.getHeader("Authorization").substring(7);
-
+        if (request.getHeader("Authorization")==null){
+            Result responseResult = Result.error(0,"NO_TOKEN");
+            //把Result对象转换为JSON格式字符串 (fastjson是阿里巴巴提供的用于实现对象和json的转换工具类)
+            String json = JSONObject.toJSONString(responseResult);
+            response.setContentType("application/json;charset=utf-8");
+            //响应
+            response.getWriter().write(json);
+            return;
+        }else {
+            //获取请求头中的令牌（token）
+            token = request.getHeader("Authorization").substring(6);
+        }
 
         //判断令牌是否存在，如果不存在，返回错误
         if(!StringUtils.hasLength(token)){	//说明字符串为空串或者null

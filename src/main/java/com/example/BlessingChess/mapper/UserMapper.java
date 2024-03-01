@@ -20,7 +20,7 @@ public interface UserMapper extends BaseMapper<User> {
 
     //会自动将生成的id值，赋值给user对象的id属性
     @Options(useGeneratedKeys = true,keyProperty = "id")
-    @Insert("insert into user(session_key,open_id,last_time,username,invitation_code) values (#{sessionKey}, #{openId}, #{lastTime}, #{username},#{invitationCode})")
+    @Insert("insert into user(session_key,open_id,last_time,username,invitation_code,dice_num,position) values (#{sessionKey}, #{openId}, #{lastTime}, #{username},#{invitationCode},#{diceNum},#{position})")
     public void insertNewUser(User user);
 
     @Update("update user set last_time=#{lastTime} where id=#{id}")

@@ -74,8 +74,9 @@ public class LoginService {
             //将请求响应信息转为json格式
             JSONObject jsonObject = new JSONObject(response);
 
+            System.out.println(jsonObject);
             //判断请求是否有错
-            if (jsonObject.getInt("errcode") == 0) {
+            if (! jsonObject.has("errcode")) {
 
                 //在数据库中根据openid查找信息
                 User user;
@@ -109,7 +110,6 @@ public class LoginService {
 
                 //封装返回模型
                 result.setToken(userToken);
-                result.setUnionId(jsonObject.getString("unionid"));
             }
         }catch (Exception e) {
             System.out.println(e.getMessage());

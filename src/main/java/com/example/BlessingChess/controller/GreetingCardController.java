@@ -22,7 +22,7 @@ public class GreetingCardController {
      * @return 操作结果，如果成功则返回OK状态
      */
     @PostMapping("/send")
-    public Result insertNewCard(GreetingCardReceiver greetingCardReceiver){
+    public Result insertNewCard(@RequestBody GreetingCardReceiver greetingCardReceiver){
         return greetingCardService.insertNewCard(greetingCardReceiver);
     }
 
@@ -69,7 +69,7 @@ public class GreetingCardController {
      * @return 删除的结果，若成功返回ok
      */
     @PutMapping("/{cardId}")
-    public Result updateCard(@PathVariable Integer cardId,GreetingCardReceiver greetingCardReceiver){
+    public Result updateCard(@PathVariable Integer cardId,@RequestBody GreetingCardReceiver greetingCardReceiver){
         return greetingCardService.updateCard(cardId,greetingCardReceiver);
     }
 

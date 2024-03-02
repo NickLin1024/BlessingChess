@@ -20,7 +20,7 @@ public class BlessingController {
      * @return 操作结果，如果成功则返回OK状态
      */
     @PostMapping("/send")
-    public Result insertNewBlessing(BlessingReceiver blessingReceiver){
+    public Result insertNewBlessing(@RequestBody BlessingReceiver blessingReceiver){
         return blessingService.insertNewBlessing(blessingReceiver);
     }
 
@@ -65,7 +65,7 @@ public class BlessingController {
      * @return 删除的结果，若成功返回ok
      */
     @PutMapping("/{blessingId}")
-    public Result updateCard(@PathVariable Integer blessingId,BlessingReceiver blessingReceiver){
+    public Result updateCard(@PathVariable Integer blessingId, @RequestBody BlessingReceiver blessingReceiver){
         return blessingService.updateBlessing(blessingId,blessingReceiver);
     }
     /**

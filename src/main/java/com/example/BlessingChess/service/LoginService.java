@@ -74,7 +74,6 @@ public class LoginService {
             //将请求响应信息转为json格式
             JSONObject jsonObject = new JSONObject(response);
 
-            System.out.println(jsonObject);
             //判断请求是否有错
             if (! jsonObject.has("errcode")) {
 
@@ -122,7 +121,7 @@ public class LoginService {
      * 暂时用这个来测试user数据库的功能（因为缺少code）
      *
      * @param loginData
-     * @return
+     * @return 模拟的token
      */
     public Result testGetToken(LoginData loginData) {
 

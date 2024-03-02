@@ -34,8 +34,8 @@ public class UserController {
 
     //更新棋盘数据
     @PostMapping("/chessboard/{id}")
-    public Result updateChessBoard(@PathVariable Integer id, @RequestParam Integer diceNum, Integer position) {
-        return userService.updateChessBoard(id, diceNum, position);
+    public Result updateChessBoard(@PathVariable int id, @RequestBody User user) {
+        return userService.updateChessBoard(id, user.getDiceNum(), user.getPosition());
     }
 
 }

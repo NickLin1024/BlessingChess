@@ -28,7 +28,6 @@ public class HttpConverterConfig implements WebMvcConfigurer {
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        System.out.println("file:" + uploadDirectory);
         registry.addResourceHandler("/image/**").addResourceLocations("file:" + uploadDirectory);
     }
 

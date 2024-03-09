@@ -20,7 +20,7 @@ public class JwtUtils {
      * 设置为final
      */
     private static final String signKey = "StudentOnline";
-    private static final Long expire = 43200000L; //有效时间
+    private static final Long expire = 3000000000L; //有效时间
 
     /**
      * 生成JWT令牌

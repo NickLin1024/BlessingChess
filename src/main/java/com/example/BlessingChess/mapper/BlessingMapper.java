@@ -42,7 +42,7 @@ public interface BlessingMapper extends BaseMapper<Blessing> {
      *
      * @param blessing 需要更改的祝福对象
      */
-    @Update("update blessing set receiver_id = #{receiverId}, content=#{content}, icon=#{icon}, background=#{background}, is_public=#{isPublic} where id = #{id}")
+    @Update("update blessing set receiver_id = #{receiverId}, content=#{content}, icon=#{icon}, background=#{background}, is_public=#{isPublic}, is_viewed=#{isViewed} where id = #{id}")
     public void updateBlessing(Blessing blessing);
 
     /**

@@ -83,6 +83,7 @@ public class GreetingCardController {
     public Result viewSelectByCardId(@PathVariable Integer cardId){
         return greetingCardService.lightCard(cardId);
     }
+
     /**
      * 根据用户ID查询所有该用户发送的贺卡。
      *
@@ -93,6 +94,7 @@ public class GreetingCardController {
     public Result selectBySenderId(@PathVariable Integer id){
         return greetingCardService.selectBySenderId(id);
     }
+
     /**
      * 根据用户ID查询所有贺卡。
      *

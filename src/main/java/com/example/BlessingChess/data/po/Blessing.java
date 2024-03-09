@@ -77,6 +77,7 @@ public class Blessing {
      * @param blessingReceiver 前端传入的dto
      */
     public Blessing(BlessingReceiver blessingReceiver){
+        setSenderId(blessingReceiver.getSenderId());
         setContent(blessingReceiver.getContent());
         setIcon(blessingReceiver.getIconUrl());
         setBackground(blessingReceiver.getBackgroundUrl());

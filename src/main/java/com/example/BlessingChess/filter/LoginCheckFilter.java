@@ -39,7 +39,7 @@ public class LoginCheckFilter implements Filter {
 
         //获取请求url
         String url = request.getRequestURL().toString();
-
+        System.out.println(url);
 
         //判断请求url中是否包含login，如果包含，说明是登录操作，放行
         if(url.contains("/user/login")||url.contains("/test")||url.contains("/image")){

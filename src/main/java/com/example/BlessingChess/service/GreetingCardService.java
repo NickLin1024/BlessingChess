@@ -66,7 +66,7 @@ public class GreetingCardService {
         Random random = new Random();
         Integer length = list.size();
         if (length <= 0) {
-            return Result.error(0,"没有剩余贺卡");
+            return Result.success(null,"no card");
         }
         GreetingCard r = list.get(random.nextInt(0,length));
         CardReceiverRelations cardReceiverRelations = new CardReceiverRelations();

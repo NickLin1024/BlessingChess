@@ -32,6 +32,7 @@ public class BlessingService {
         }
         return Result.success(blessingMapper.selectByReceiverId(id),"success");
     }
+
     /**
      * 根据用户ID查询所有该用户发送的贺卡。
      *
@@ -121,7 +122,7 @@ public class BlessingService {
         List<Blessing> list = blessingMapper.selectNewByReceiverId(id);
         Integer length = list.size();
         if (length <= 0) {
-            return Result.error(0,"没有剩余祝福");
+            return Result.success(null,"no blessing!");
         }
         Blessing b = list.get(random.nextInt(0,length));
         b.setViewed(true);
